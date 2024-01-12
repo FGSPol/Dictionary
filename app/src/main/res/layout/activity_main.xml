@@ -40,19 +40,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="word"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         android:id="@+id/word_textview"
         />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="phonetics"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textColor="@color/grey"
         android:id="@+id/phonetic_textview"/>
+
+    <ImageButton
+        android:id="@+id/speak_btn"
+        android:src="@drawable/baseline_volume_up_24"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_alignParentEnd="true"
+        android:text="Speak" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

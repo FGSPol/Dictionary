@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/editTextText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/logoImageView"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="WordWize" />
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="255dp"
+        android:layout_height="275dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <Button
+        android:id="@+id/dictionarybtn"
+        android:layout_width="146dp"
+        android:layout_height="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="40dp"
+        android:text="Dictionary"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/quizbtn"
+        android:layout_width="146dp"
+        android:layout_height="62dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="40dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Quiz" />
+</RelativeLayout>
