@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.searchBtn.setOnClickListener {
-            val word = binding.searchInput.text.toString()
+            val word = binding.searchFieldInput.text.toString()
             getDescription(word)
         }
 
@@ -47,11 +47,9 @@ class MainActivity : AppCompatActivity() {
             }catch (e : Exception){
                 runOnUiThread{
                     setInProgress(false)
-                    Toast.makeText(applicationContext,"Something went wrong",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,"Something went wrong, it could be the word doesnt exist",Toast.LENGTH_SHORT).show()
                 }
             }
-
-
         }
     }
 

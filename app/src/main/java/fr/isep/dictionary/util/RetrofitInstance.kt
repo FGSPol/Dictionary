@@ -17,5 +17,4 @@ object RetrofitInstance {
 
     val dictionaryApi : DictionaryApi = getInstance().create(DictionaryApi::class.java)
 
-
 }

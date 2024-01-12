@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="20dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -16,16 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search for your word here"
-            android:layout_toLeftOf="@id/search_btn"
-            android:id="@+id/search_input"
+            android:id="@+id/search_field_input"
             android:padding="12dp"/>
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/search_btn"
-            android:text="Search"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="8dp"/>
+
         <ProgressBar
             android:layout_width="100dp"
             android:layout_height="24dp"
@@ -34,11 +27,14 @@
             android:indeterminateTint="@color/my_primary"
             android:id="@+id/progress_bar"
             android:visibility="gone"/>
-
-
-
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/search_btn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Search" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,14 +43,14 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
-        android:textColor="#1565C0"
         android:id="@+id/word_textview"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="/t e s t/"
+        tools:text="phonetics"
+        android:textSize="18sp"
         android:textColor="@color/grey"
         android:id="@+id/phonetic_textview"/>
 
@@ -62,7 +58,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/meaning_recycler_view"/>
-
-
-
 </LinearLayout>
