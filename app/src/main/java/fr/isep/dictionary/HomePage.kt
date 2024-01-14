@@ -1,9 +1,9 @@
 package fr.isep.dictionary
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 class HomePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,15 +13,15 @@ class HomePage : AppCompatActivity() {
         val dictionarybtn: Button = findViewById(R.id.dictionarybtn)
         val quizbtn: Button = findViewById(R.id.quizbtn)
 
-
         // Set click listeners for the buttons
         dictionarybtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java);
-            startActivity(intent);
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         quizbtn.setOnClickListener {
-            // Handle Button 2 click
+            val intent = Intent(this, DefinitionGame::class.java)
+            startActivity(intent)
         }
     }
 }
