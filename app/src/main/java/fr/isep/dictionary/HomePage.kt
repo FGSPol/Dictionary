@@ -20,7 +20,7 @@ class HomePage : AppCompatActivity() {
         }
 
         quizbtn.setOnClickListener {
-            val intent = Intent(this, DefinitionGame::class.java)
+            val intent = Intent(this, Explanations::class.java)
             startActivity(intent)
         }
     }

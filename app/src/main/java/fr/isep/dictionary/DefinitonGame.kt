@@ -141,11 +141,6 @@ class DefinitionGame : AppCompatActivity() {
         displayRandomDefinition()
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
-    }
-
-
     suspend fun fetchDefinition(word: String): theWord {
         return withContext(Dispatchers.IO) {
             try {
@@ -180,11 +175,11 @@ class DefinitionGame : AppCompatActivity() {
 
         if (isCorrect) {
             imageView.setImageResource(R.drawable.trophy) // Set your happy face image
-            textViewMessage.text = "Congratulations! Good answer! Score: $score"
+            textViewMessage.text = "Congratulations! Good answer! Streak : $score"
             dialogView.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
         } else {
             imageView.setImageResource(R.drawable.sadface) // Set your sad face image
-            textViewMessage.text = "Sadly, it's not the correct answer. Score: 0"
+            textViewMessage.text = "Sadly, it's not the correct answer. Streak : 0"
             dialogView.setBackgroundColor(resources.getColor(android.R.color.holo_red_light))
         }
 
@@ -195,5 +190,4 @@ class DefinitionGame : AppCompatActivity() {
 
         Handler().postDelayed({ alertDialog.dismiss() }, 2000)
     }
-
 }

@@ -32,6 +32,10 @@
             android:name=".DefinitionGame"
             android:exported="true" />
 
+        <activity
+            android:name=".Explanations"
+            android:exported="true" />
+
     </application>
 
 </manifest>
