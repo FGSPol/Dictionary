@@ -7,17 +7,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import fr.isep.dictionary.R
 import fr.isep.dictionary.models.theWord
 import fr.isep.dictionary.util.RetrofitInstance
-import fr.isep.dictionary.util.RetrofitInstance.dictionaryApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.io.IOException
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 class DefinitionGame : AppCompatActivity() {
@@ -45,7 +42,7 @@ class DefinitionGame : AppCompatActivity() {
         buttonOption2 = findViewById(R.id.buttonOption2)
         buttonOption3 = findViewById(R.id.buttonOption3)
 
-        // Load words and set click listeners for the buttons
+        // Load words for the buttons
         loadWords()
 
         buttonOption1.setOnClickListener { checkAnswer(buttonOption1) }
@@ -62,20 +59,20 @@ class DefinitionGame : AppCompatActivity() {
         randomWord2 = getRandomWord(wordList)
         randomWord3 = getRandomWord(wordList)
 
-        // Ensure distinct words
+        // Ensure all the 3 words are dinstincts
         while (randomWord1 == randomWord2 || randomWord1 == randomWord3 || randomWord2 == randomWord3) {
             randomWord1 = getRandomWord(wordList)
             randomWord2 = getRandomWord(wordList)
             randomWord3 = getRandomWord(wordList)
         }
 
-        // Set text on buttons
+        // Set text on the 3 buttons
         buttonOption1.text = randomWord1
         buttonOption2.text = randomWord2
         buttonOption3.text = randomWord3
     }
 
-
+    // Function to be able to read the wordList
     private fun readWordList(fileName: String): List<String> {
         val list = mutableListOf<String>()
         try {
@@ -89,6 +86,7 @@ class DefinitionGame : AppCompatActivity() {
         return list
     }
 
+    // Function to pick a random word through the wordList
     private fun getRandomWord(wordList: List<String>): String? {
         return if (wordList.isNotEmpty()) {
             val randomIndex = (0 until wordList.size).random()
@@ -98,20 +96,20 @@ class DefinitionGame : AppCompatActivity() {
         }
     }
 
+    // Function to build the definitions of the word into a displayable String
     private fun buildDefinitionText(wordDetails: theWord): CharSequence {
         // Extract all definitions into a single string
         val definitionsText = wordDetails.meanings
             .flatMap { it.definitions }
             .mapIndexed { index, definition ->
-                "${index + 1}. ${definition.definition}${System.lineSeparator()}${System.lineSeparator()}"
+                "${index + 1}. ${definition.definition}${System.lineSeparator()}${System.lineSeparator()}" // Add 2 lineSeparators to make it readable
             }
             .joinToString("")
 
         return "Definitions:${System.lineSeparator()}$definitionsText"
     }
 
-
-
+    // Display one definition among the 3 words
     private fun displayRandomDefinition() {
         correctWord = listOf(randomWord1, randomWord2, randomWord3).random()
         if (correctWord != null) {
@@ -122,10 +120,11 @@ class DefinitionGame : AppCompatActivity() {
         }
     }
 
+    // Check if the answer is good or not
     private fun checkAnswer(button: Button) {
         val selectedWord = button.text.toString()
         if (selectedWord == correctWord) {
-            currentScore ++
+            currentScore++
             showPopup(true, currentScore)
         } else {
             currentScore = 0
@@ -135,12 +134,13 @@ class DefinitionGame : AppCompatActivity() {
         restartGame()
     }
 
-    private fun restartGame()
-    {
+    // Restart a new set of words after getting the answers of the precedent words
+    private fun restartGame() {
         loadWords()
         displayRandomDefinition()
     }
 
+    // Display the word's definition using coroutines
     suspend fun fetchDefinition(word: String): theWord {
         return withContext(Dispatchers.IO) {
             try {
@@ -149,7 +149,7 @@ class DefinitionGame : AppCompatActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val wordDetails = response.body()!!.firstOrNull()
 
-                    // Only consider the first definition if available
+                    // Only consider the definitions of the first meaning if available
                     val meanings = wordDetails?.meanings?.take(1) ?: emptyList()
 
                     return@withContext theWord(
@@ -168,16 +168,20 @@ class DefinitionGame : AppCompatActivity() {
         }
     }
 
+    // Showing the popup window when you played the game
     private fun showPopup(isCorrect: Boolean, score: Int) {
         val dialogView = layoutInflater.inflate(R.layout.popup_layout, null)
         val imageView = dialogView.findViewById<ImageView>(R.id.imageView)
         val textViewMessage = dialogView.findViewById<TextView>(R.id.textViewMessage)
 
+        // Good answer
         if (isCorrect) {
             imageView.setImageResource(R.drawable.trophy) // Set your happy face image
             textViewMessage.text = "Congratulations! Good answer! Streak : $score"
             dialogView.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
-        } else {
+        }
+        // Bad answer
+        else {
             imageView.setImageResource(R.drawable.sadface) // Set your sad face image
             textViewMessage.text = "Sadly, it's not the correct answer. Streak : 0"
             dialogView.setBackgroundColor(resources.getColor(android.R.color.holo_red_light))
@@ -187,7 +191,7 @@ class DefinitionGame : AppCompatActivity() {
         builder.setView(dialogView)
         val alertDialog = builder.create()
         alertDialog.show()
-
+        // Give a maximum time for the window to close
         Handler().postDelayed({ alertDialog.dismiss() }, 2000)
     }
 }
