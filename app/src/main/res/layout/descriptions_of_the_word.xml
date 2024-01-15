@@ -59,7 +59,4 @@
         android:layout_height="wrap_content"
         tools:text="asad, asaad, asdia ,asdajod"
         android:id="@+id/antonyms_textview"/>
-
-
-
 </LinearLayout>

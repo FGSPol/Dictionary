@@ -1,5 +1,6 @@
 package fr.isep.dictionary
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -26,6 +27,11 @@ class MainActivity : AppCompatActivity() {
         // Inflate the layout using View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.homepagebtn.setOnClickListener {
+            val intent = Intent(this, HomePage::class.java)
+            startActivity(intent)
+        }
 
         // Set initial visibility of speak button to GONE
         binding.speakBtn.visibility = View.GONE
